@@ -1,0 +1,19 @@
+<h3>ユーザーリスト</h3>
+  
+    <table>
+        <thead>
+            <tr>
+                <th>ユーザーネーム</th>
+                <th>アカウント状態</th>
+            </tr>
+        </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                  <th><%= link_to user.user_name, admin_user_path(user.id) %></th>
+                  <th><%= user.is_active %></th>
+              </tr>
+            <% end %>
+          </tbody>
+    </table>
+  
