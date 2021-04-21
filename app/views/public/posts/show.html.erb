@@ -1,0 +1,32 @@
+<div>
+     <div>
+       <%= link_to @post.user.user_name, user_path(@post.user.id) %>
+     </div>
+       <div>
+         <%= attachment_image_tag @post, :image %>
+       </div>
+         <div>
+           <%= @post.body %>
+         </div>
+   </div>
+   
+    <div>
+      <% @post.post_comments.each do |post_comment| %>
+        <%= post_comment.user.user_name %>
+        <%= post_comment.comment %>
+      
+    </div>
+     
+      <% if post_comment.user == current_user %>
+       <div>
+         <%= link_to "コメントを削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
+       </div>
+      <% end %>
+     <% end %>
+     
+      <div>
+       <%= form_with(model:[@post, @post_comment], local:true) do |f| %>
+         <%= f.text_area :comment, rows:"5", placeholder: "コメントをここに" %>
+         <%= f.submit "送信する" %>
+       <% end %>
+      </div>

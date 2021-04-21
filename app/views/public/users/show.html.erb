@@ -1,6 +1,21 @@
-
-<h3><%= @user.user_name %></h3>
-
- <p><%= @user.introduction %></p>
- 
-  <%= link_to "プロフィール編集", edit_user_path %>
+<% if @user == current_user %>
+ <h3><%= @user.user_name %></h3>
+  <p><%= @user.introduction %></p>
+    <%= link_to "プロフィール編集", edit_user_path %>
+<% else %>
+ <h3><%= @user.user_name %></h3>
+   <p><%= @user.introduction %></p>
+<% end %>
+  
+   
+      <% @user.posts.each do |post| %>
+     
+       <div>
+        <div>
+         <%= attachment_image_tag post, :image %>
+        </div>
+          <div>
+           <%= post.body %>
+          </div>
+       </div>
+   <% end %>
