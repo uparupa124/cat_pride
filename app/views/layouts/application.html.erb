@@ -18,6 +18,7 @@
     <% elsif user_signed_in? %>
       <li><%= link_to "ホーム", "/" %></li>
       <li><%= link_to "プロフィール", user_path(current_user) %></li>
+      <li><%= link_to "検索", search_users_path %></li>
       <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
     <% else %>
       <li>ユーザー</li>

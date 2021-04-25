@@ -1,12 +1,14 @@
 <!--<h3>ログインしているユーザーの名前</h3>-->
   
-  <%= form_with model:@post, local:true do |f| %>
-    <!--<%= f.label :"画像選択" %>-->
+  <%= form_with model: @post, local: true do |f| %>
+    <%= f.label :"画像" %>
     <%= f.attachment_field :image %>
     <%= f.label :"コメント" %>
     <%= f.text_field :body %>
     <%= f.submit "投稿" %>
   <% end %>
+  
+  
    <% @posts.each do |post| %>
    <div>
      <div>
@@ -23,4 +25,17 @@
      <div>
          <p><%= link_to "コメント#{post.post_comments.count}件" , post_path(post.id) %></p>
      </div>
+      <% if post.favorited_by?(current_user) %>
+       <p>
+         <%= link_to post_favorites_path(post), method: :delete do %>
+          ♥<%= post.favorites.count %>
+         <% end %>
+       </p>
+      <% else %>
+       <p>
+         <%= link_to post_favorites_path(post), method: :post do %>
+          ♡<%= post.favorites.count %>
+         <% end %>
+       </p>
+      <% end %>
    <% end %>

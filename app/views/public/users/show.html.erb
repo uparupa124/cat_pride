@@ -5,8 +5,16 @@
 <% else %>
  <h3><%= @user.user_name %></h3>
    <p><%= @user.introduction %></p>
+    <% if user_signed_in? && current_user != @user %>
+     <% if current_user.following?(@user) %>
+       <%= button_to "フォロー解除", relationship_path(current_user.relationships.find_by(follower: @user)), method: :delete %>
+     <% else %>
+       <%= button_to "フォロー", relationships_path(follower: @user) %>
+     <% end %>
+    <% end %>
 <% end %>
-  
+  <%= link_to "フォロー#{@user.followings.count}", followings_user_path %>
+  <%= link_to "フォロワー#{@user.followers.count}", followers_user_path %>
    
       <% @user.posts.each do |post| %>
      
