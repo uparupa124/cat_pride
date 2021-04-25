@@ -1,3 +1,5 @@
+<h4>フォロー中</h4>
+
 <% @user.followings.each do |following| %>
   <%= link_to following.user_name, user_path(following) %>
 <% end %>

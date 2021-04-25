@@ -22,5 +22,6 @@
    </table>
    <%= f.submit "変更する" %>
  <% end %>
+  <%= link_to "退会する", withdrawal_user_path(@user) %>
  
-  <%= link_to "戻る", user_path(@user.id) %>
+  <%= link_to "戻る", user_path(@user) %>

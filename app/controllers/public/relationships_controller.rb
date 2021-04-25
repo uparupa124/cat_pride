@@ -6,6 +6,7 @@ class Public::RelationshipsController < ApplicationController
     @other_user = User.find(params[:follower])
     current_user.follow(@other_user)
     redirect_to user_path(@other_user)
+    
   end
   
   def destroy
@@ -13,4 +14,5 @@ class Public::RelationshipsController < ApplicationController
     current_user.unfollow(params[:id])
     redirect_to user_path(@user)
   end
+
 end

@@ -16,6 +16,7 @@ class Public::UsersController < ApplicationController
      
     def followers
      @user = User.find(params[:id])
+     p @user
     end
     
     def show
@@ -32,6 +33,18 @@ class Public::UsersController < ApplicationController
      redirect_to user_path
     end
     
+    def withdrawal
+     @user = User.find(params[:id])
+    end
+    
+    def destroy
+     @user = User.find(params[:id])
+     
+     if @user == current_user
+       @user.destroy
+       redirect_to new_user_session_path
+     end
+    end
     
     private
      def user_params

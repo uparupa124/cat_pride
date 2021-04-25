@@ -15,10 +15,10 @@
        <%= link_to post.user.user_name, user_path(post.user.id) %>
      </div>
        <div>
-         <%= attachment_image_tag post, :image %>
+         <a href = "/posts/<%= post.id %>"><%= attachment_image_tag post, :image %></a>
        </div>
          <div>
-           <%= post.body %>
+           <a href = "/posts/<%= post.id %>"><%= post.body %></a>
          </div>
    </div>
      
