@@ -3,6 +3,6 @@ class Public::HomesController < ApplicationController
     
     def top
       @post = Post.new
-      @posts = Post.all
+      @posts = Post.page(params[:page]).reverse_order
     end
 end
