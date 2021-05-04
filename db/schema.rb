@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 2021_04_22_063047) do
   end
 
   create_table "post_comments", force: :cascade do |t|
-    t.string "comment_image_id"
     t.string "comment"
     t.integer "post_id"
     t.integer "user_id"
@@ -41,7 +40,6 @@ ActiveRecord::Schema.define(version: 2021_04_22_063047) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string "title"
     t.string "body"
     t.string "image_id"
     t.string "video_id"
@@ -71,7 +69,6 @@ ActiveRecord::Schema.define(version: 2021_04_22_063047) do
     t.string "telephone_number"
     t.text "introduction"
     t.string "profile_image_id"
-    t.boolean "is_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

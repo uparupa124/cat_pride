@@ -2,13 +2,6 @@ class Public::UsersController < ApplicationController
  
  before_action :authenticate_user!
     
-    def search
-     if params[:user_name].present?
-        @users = User.where("user_name LIKE ?", "%#{params[:user_name]}%")
-     else
-        @users = User.none
-     end
-    end
     
     def followings
      @user = User.find(params[:id])
@@ -21,6 +14,7 @@ class Public::UsersController < ApplicationController
     
     def show
      @user = User.find(params[:id])
+     p @user.posts
     end
     
     def edit
@@ -29,8 +23,12 @@ class Public::UsersController < ApplicationController
     
     def update
      @user = User.find(params[:id])
-     @user.update(user_params)
-     redirect_to user_path
+     
+     if @user.update(user_params)
+      redirect_to user_path
+     else
+      render "edit"
+     end
     end
     
     def withdrawal
@@ -48,6 +46,6 @@ class Public::UsersController < ApplicationController
     
     private
      def user_params
-        params.require(:user).permit(:user_name, :introduction, :email, :telephone_number)
+        params.require(:user).permit(:user_name, :introduction, :email, :telephone_number, :profile_image)
      end
 end

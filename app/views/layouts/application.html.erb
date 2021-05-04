@@ -4,27 +4,51 @@
     <title>CatPride</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
+    <script src="https://kit.fontawesome.com/2aae60316c.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <header>
-    <% if admin_signed_in? %>
-      <li>管理者</li>
-      <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+         <a class="navbar-brand p-3" href="/"><%= image_tag("logo.png") %></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+           <div class="collapse navbar-collapse" id="navbarNavDropdown">
+             <ul class="navbar-nav ml-auto">
+              <% if admin_signed_in? %>
+                <li class="nav-item">管理者</li>
+                <li class="nav-item"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link text-dark" %></li>
     
-    <% elsif user_signed_in? %>
-      <li><%= link_to "ホーム", "/" %></li>
-      <li><%= link_to "プロフィール", user_path(current_user) %></li>
-      <li><%= link_to "検索", search_users_path %></li>
-      <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-    <% else %>
-      <li>ユーザー</li>
-      <li><%= link_to "新規登録", new_user_registration_path %></li>
-      <li><%= link_to "ログイン", new_user_session_path %></li>
-    <% end %>  
+              <% elsif user_signed_in? %>
+                <li class="nav-item">
+                  <a class="fas fa-home nav-link text-dark" href="/">&nbsp;Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="fas fa-user nav-link text-dark" href="/users/<%= current_user.id %>">&nbsp;&nbsp;User</a>
+                </li>
+                <li class="nav-item">
+                  <a class="fas fa-search nav-link text-dark" href="/finder">&nbsp;Search</a>
+                </li>
+                <li class="nav-item">
+                  <a class="fas fa-sign-out-alt nav-link text-dark" rel="nofollow" data-method="delete" href="/users/sign_out">&nbsp;Log out</a>
+                </li>
+              <% else %>
+                <li class="nav-item">
+                  <a class="fas fa-user-plus nav-link text-dark" href="/users/sign_up">&nbsp;Sign up</a>
+                </li>
+                <li class="nav-item">
+                  <a class="fas fa-sign-in-alt nav-link text-dark" href="/users/sign_in">&nbsp;&nbsp;Log in</a>
+                </li>
+              <% end %> 
+             </ul>
+           </div>
+          </div>
+        </nav>
     </header>
     <%= yield %>
   </body>

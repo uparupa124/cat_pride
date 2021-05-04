@@ -1,29 +1,49 @@
-<% if @user == current_user %>
- <h3><%= @user.user_name %></h3>
-  <p><%= @user.introduction %></p>
-    <%= link_to "プロフィール編集", edit_user_path %>
-<% else %>
- <h3><%= @user.user_name %></h3>
-   <p><%= @user.introduction %></p>
-    <% if user_signed_in? && current_user != @user %>
-     <% if current_user.following?(@user) %>
-       <%= button_to "フォロー解除", relationship_path(current_user.relationships.find_by(follower: @user)), method: :delete %>
-     <% else %>
-       <%= button_to "フォロー", relationships_path(follower: @user) %>
-     <% end %>
-    <% end %>
-<% end %>
-  <%= link_to "フォロー#{@user.followings.count}", followings_user_path %>
-  <%= link_to "フォロワー#{@user.followers.count}", followers_user_path %>
-   
-      <% @user.posts.each do |post| %>
-     
-       <div>
-        <div>
-         <%= attachment_image_tag post, :image %>
-        </div>
+<div class="container">
+ 
+  <div style="margin-top: 40px;">
+    <% if @user == current_user %>
+      <h3><%= attachment_image_tag current_user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size:"50x50" %><%= @user.user_name %></h3>
+        <p><%= @user.introduction %></p>
           <div>
-           <%= post.body %>
+            <%= link_to "プロフィール編集", edit_user_path, class:"btn btn-success" %>
           </div>
-       </div>
-   <% end %>
+    <% else %>
+      <h3><%= attachment_image_tag @user_user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size:"50x50" %><%= @user.user_name %></h3>
+        <p><%= @user.introduction %></p>
+          <% if user_signed_in? && current_user != @user %>
+            <% if current_user.following?(@user) %>
+               <%= button_to "フォロー解除", relationship_path(current_user.relationships.find_by(follower: @user)), method: :delete, class:"btn btn-primary" %>
+            <% else %>
+               <%= button_to "フォロー", relationships_path(follower: @user), class:"btn btn-primary" %>
+            <% end %>
+          <% end %>
+    <% end %>
+     <div>
+       <%= link_to "フォロー#{@user.followings.count}", followings_user_path %>
+       <%= link_to "フォロワー#{@user.followers.count}", followers_user_path %>
+     </div>
+  </div>
+  
+    <br></br><h4 class="text-center">Posts</h4>
+      <div class="row" style="margin-top: 40px;">
+        <% @user.posts.each do |post| %>
+          <div class="col-md-4 mt-5 d-flex pl-5" style="width: 80%;">
+            <div class="d-flex">
+              <a href="/posts/<%= post.id %>"><%= attachment_image_tag post, :image, width:"240px", height:"240px" %></a>
+            </div>
+              <% if post.video_id.present? != false %>
+                <div class="d-flex">
+                  <a href="/posts/<%= post.id %>"><%= video_tag(post.video_id, width:"240px", height:"240px", :controls => true) %></a>
+                </div>
+              <% end %>
+          </div>
+        <% end %>
+     </div>
+     
+</div>
+     
+     
+    
+   
+  
+ 

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+
   devise_for :admin,controllers: {
     sessions: "admins/sessions",
     passwords: "admins/passwords",
@@ -19,17 +20,18 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: "homes#top"
+    get "finder" => "finders#finder", as: "finder"
     resources :users, only:[:show, :edit, :update, :destroy] do
       get :withdrawal, on: :member
       get :followings, on: :member
       get :followers, on: :member
-      get :search, on: :collection
     end
     resources :posts, only:[:show, :create, :destroy] do
-      resource :favorites, only:[:create, :destroy]
+      resource :favorites, only:[:create, :destroy, :show]
       resources :post_comments, only:[:create, :destroy]
    end
    resources :relationships, only:[:create, :destroy]
+   
 
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

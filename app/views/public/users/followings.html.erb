@@ -1,5 +1,12 @@
-<h4>フォロー中</h4>
+<div class="container">
+  <div style="margin-top: 40px; margin-bottom: 40px;">
+   <h4>フォロー中</h4>
+  </div>
+
 
 <% @user.followings.each do |following| %>
-  <%= link_to following.user_name, user_path(following) %>
+ <div class="mt-2">
+  <%= attachment_image_tag following, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size:"50x50" %><%= link_to following.user_name, user_path(following) %>
 <% end %>
+ </div>
+</div>

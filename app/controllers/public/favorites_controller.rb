@@ -13,5 +13,10 @@ class Public::FavoritesController < ApplicationController
     favorite.destroy
     redirect_to "/"
   end
+  
+  def show
+    @post = Post.find(params[:post_id])
+    @favorites = @post.favorites.all
+  end
 
 end

@@ -1,0 +1,5 @@
+<h4>いいねしたユーザー</h4>
+
+<% @favorites.each do |favorite| %>
+ <%= link_to favorite.user.user_name, user_path(favorite.user) %>
+<% end %>

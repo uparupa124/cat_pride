@@ -1,27 +1,57 @@
-<h3>ユーザー情報編集</h3>
+<div class="container mt-5">
+  <%# ここからエラーメッセージ %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2 class="text-danger"><%= pluralize(@user.errors.count, "error") %> prohibited this User from being saved:</h2>
 
- <%= form_with model: @user, local:true do |f| %>
-   <table>
-     <tbody>
-       <tr>
-         <td><%= f.label :"ユーザーネーム" %></td>
-         <td><%= f.text_field :user_name %></td>
-       </tr>
-          <tr>
-            <td><%= f.label :"自己紹介" %></td>
-            <td><%= f.text_field :introduction %></td>
-          </tr>
+        <ul>
+            <% @user.errors.full_messages.each do |message| %>
+             <li class="text-danger"><%= message %></li>
+          <% end %>
+        </ul>
+    </div>
+  <% end %>
+  <%# ここまでエラーメッセージ %>
+    <div style="width: 100%;">
+      <div class="d-inline-block">
+        <h3>ユーザー情報編集</h3>
+      </div>
+        <div class="d-inline-block" style="margin-left: 580px; margin-bottom: 2px;">
+          <%= link_to "退会する", withdrawal_user_path(@user), class:"btn btn-danger" %>
+        </div>
+    </div>
+      <%= form_with model: @user, local:true do |f| %>
+        <table class="table">
+          <tbody>
             <tr>
-              <td><%= f.label :"メールアドレス" %></td>
-              <td><%= f.text_field :email %></td>
+              <td><%= f.label :"プロフィール画像" %></td>
+              <td><%= f.attachment_field :profile_image %></td>
             </tr>
               <tr>
-                <td><%= f.label :"電話番号" %></td>
-                <td><%= f.text_field :telephone_number %></td>
-     </tbody>
-   </table>
-   <%= f.submit "変更する" %>
- <% end %>
-  <%= link_to "退会する", withdrawal_user_path(@user) %>
- 
-  <%= link_to "戻る", user_path(@user) %>
+                <td><%= f.label :"ユーザーネーム" %></td>
+                <td><%= f.text_field :user_name %></td>
+              </tr>
+                <tr>
+                  <td><%= f.label :"自己紹介" %></td>
+                  <td><%= f.text_area :introduction,rows:"5" %></td>
+                </tr>
+                  <tr>
+                    <td><%= f.label :"メールアドレス" %></td>
+                    <td><%= f.text_field :email %></td>
+                  </tr>
+                    <tr>
+                      <td><%= f.label :"電話番号" %></td>
+                      <td><%= f.text_field :telephone_number %></td>
+          </tbody>
+        </table>
+        
+          <div style="width: 100%;">
+            <div style="margin-left: 180px;" class="d-inline-block">
+              <%= f.submit "変更する", class:"btn btn-success" %>
+            </div>
+      <% end %>
+        <div class="d-inline-block" style="margin-left: 570px;">
+          <%= link_to "戻る", user_path(@user), class:"btn btn-secondary" %>
+        </div>
+         </div>
+</div>

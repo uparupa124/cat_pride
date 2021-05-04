@@ -1,4 +1,16 @@
-<h1>本当に退会しますか？</h1>
+<div class="container mt-5">
 
-<%= link_to "退会する", user_path(@user), method: :delete, "data-confirm" => "確定" %>
-<%= link_to "戻る", edit_user_path(@user) %>
+  <h4 class="text-center">退会画面</h4>
+    <div class="w-100 text-center">
+      <p>一度退会したアカウントを再開することはできません。</p>
+        <p>再度、猫自慢をご利用したい場合は、</p>
+          <p>新しくアカウントを作成していただく必要が御座います。</p>
+      <div class="d-inline-block" style="margin-right: 20px;">
+        <%= link_to "退会する", user_path(@user), method: :delete, "data-confirm" => "確定", class:"btn btn-danger" %>
+      </div>
+        <div class="d-inline-block">
+          <%= link_to "戻る", edit_user_path(@user), class:"btn btn-secondary" %>
+        </div>
+    </div>
+
+</div>

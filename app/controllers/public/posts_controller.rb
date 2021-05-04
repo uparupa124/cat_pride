@@ -10,8 +10,12 @@ class Public::PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     
-    @post.save
-    redirect_to post_path(@post)
+    if @post.save
+      redirect_to post_path(@post)
+    else
+      @posts = Post.page(params[:page]).reverse_order
+      render "public/homes/top"
+    end
   end
   
   def destroy
