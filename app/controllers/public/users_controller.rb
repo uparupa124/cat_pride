@@ -9,12 +9,10 @@ class Public::UsersController < ApplicationController
      
     def followers
      @user = User.find(params[:id])
-     p @user
     end
     
     def show
      @user = User.find(params[:id])
-     p @user.posts
     end
     
     def edit

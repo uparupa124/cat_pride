@@ -1,9 +1,10 @@
-<h3><%= @user.user_name %>様の詳細</h3>
+<div class="container mt-5">
+ <h3><%= @user.user_name %>様の詳細</h3>
 
- <table>
+  <table>
      <tbody>
          <tr>
-             <td>名前</td>
+             <td style="width: 300px;">名前</td>
              <td><%= @user.full_name %></td>
          </tr>
            <tr>
@@ -14,7 +15,14 @@
                  <td>電話番号</td>
                  <td><%= @user.telephone_number %></td>
      </tbody>
- </table>
+  </table>
  
-  <%= link_to "編集する", edit_admin_user_path(@user.id) %>
-  <%= link_to "戻る", "/admin" %>
+    <%= link_to "#{@user.user_name}のPosts", admin_user_posts_path(@user) %>
+      <div>
+        <%= link_to "編集する", edit_admin_user_path(@user.id), class:"btn btn-success" %>
+        <%= link_to "戻る", "/admin", class:"btn btn-secondary" %>
+      </div>
+       <div style="margin-top: 20px;">
+         <%= link_to "アカウントの削除", admin_user_path(@user), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-danger" %>
+       </div>
+</div>

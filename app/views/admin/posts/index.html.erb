@@ -1,0 +1,26 @@
+<div class="container">
+ 
+  <div style="margin-top: 40px;">
+   
+      <h3><%= attachment_image_tag @user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size:"50x50" %><%= @user.user_name %></h3>
+        <p><%= @user.introduction %></p>
+         
+  </div>
+  
+    <br></br><h4 class="text-center">Posts</h4>
+      <div class="row" style="margin-top: 40px;">
+        <% @user.posts.each do |post| %>
+          <div class="col-md-4 mt-5 d-flex pl-5" style="width: 80%;">
+            <div class="d-flex">
+              <a href="/admin/users/<%= @user.id %>/posts/<%= post.id %>"><%= attachment_image_tag post, :image, width:"240px", height:"240px" %></a>
+            </div>
+              <% if post.video_id.present? != false %>
+                <div class="d-flex">
+                  <a href="/admin/users/<%= @user.id %>/posts/<%= post.id %>"><%= video_tag(post.video_id, width:"240px", height:"240px", :controls => true) %></a>
+                </div>
+              <% end %>
+          </div>
+        <% end %>
+     </div>
+     
+</div>

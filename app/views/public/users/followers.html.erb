@@ -1,22 +1,22 @@
 <div class="container">
  <div style="margin-top: 40px; margin-bottom: 40px;">
-<h4>フォロワー</h4>
+  <h4>フォロワー</h4>
  </div>
-<% @user.followers.each do |follower| %>
-<div class="mt-2">
- <%= attachment_image_tag follower, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size:"50x50" %><%= link_to follower.user_name, user_path(follower) %>
+  <% @user.followers.each do |follower| %>
+    <div class="mt-2">
+      <%= attachment_image_tag follower, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size:"50x50" %><%= link_to follower.user_name, user_path(follower) %>
 
- <% if user_signed_in? && current_user == @user %>
-     <% if current_user.following?(follower) %>
-      <div class="d-inline-block">
-       <%= button_to "フォロー解除", relationship_path(current_user.relationships.find_by(follower: follower)), method: :delete %>
-      </div>
-     <% else %>
-      <div class="d-inline-block">
-       <%= button_to "フォロー", relationships_path(follower: follower) %>
-      </div>
-     <% end %>
- <% end %>
- </div>
-<% end %>
+        <% if user_signed_in? && current_user == @user %>
+          <% if current_user.following?(follower) %>
+            <div class="d-inline-block">
+              <%= button_to "フォロー解除", relationship_path(current_user.relationships.find_by(follower: follower)), method: :delete, class:"btn btn-primary" %>
+            </div>
+          <% else %>
+            <div class="d-inline-block">
+              <%= button_to "フォロー", relationships_path(follower: follower), class:"btn btn-primary" %>
+            </div>
+          <% end %>
+        <% end %>
+    </div>
+       <% end %>
 </div>

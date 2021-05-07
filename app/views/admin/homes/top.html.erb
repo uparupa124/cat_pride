@@ -1,19 +1,20 @@
-<h3>ユーザーリスト</h3>
+<div class="container mt-5">
+  <h3>ユーザーリスト</h3>
   
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                <th>ユーザーネーム</th>
-                <th>アカウント状態</th>
+                <th style="width: 300px;">ユーザーネーム</th>
+                <th>名前</th>
             </tr>
         </thead>
           <tbody>
             <% @users.each do |user| %>
               <tr>
                   <th><%= link_to user.user_name, admin_user_path(user.id) %></th>
-                  <th><%= user.is_active %></th>
+                  <th><%= user.full_name %></th>
               </tr>
             <% end %>
           </tbody>
     </table>
-  
+  </div>
