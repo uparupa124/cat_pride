@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: "homes#top"
+    get "about" => "homes#about"
     get "all_posts" => "homes#all_posts"
     get "favorite_posts" => "homes#favorite_posts"
     get "finder" => "finders#finder", as: "finder"
